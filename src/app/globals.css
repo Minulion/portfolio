@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #f1f6ff;
+  --bg-secondary: #dde8f9;
+  --bg-panel: #f7fbff;
+  --fg-primary: #101a28;
+  --fg-muted: #42526a;
+  --accent: #7bc2ff;
+}
+
+.dark {
+  --bg-primary: #060b14;
+  --bg-secondary: #0f1a2e;
+  --bg-panel: #0f1828;
+  --fg-primary: #ecf3ff;
+  --fg-muted: #a6b4cc;
+  --accent: #f3c87b;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-panel: var(--bg-panel);
+  --color-foreground: var(--fg-primary);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-space-grotesk);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: color-mix(in srgb, var(--fg-primary) 16%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  color: var(--fg-primary);
+  background: var(--bg-primary);
+  font-family: var(--font-manrope), "Segoe UI", sans-serif;
+  transition:
+    color 280ms ease,
+    background-color 280ms ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-space-grotesk), var(--font-manrope), sans-serif;
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 88%, white 12%), color-mix(in srgb, var(--bg-panel) 70%, transparent));
+  border: 1px solid color-mix(in srgb, var(--fg-primary) 14%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+@keyframes cursor-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-cursor {
+  animation: cursor-blink 0.9s steps(1) infinite;
 }
