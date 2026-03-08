@@ -13,23 +13,22 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    const prevPath = sessionStorage.getItem("prev_path");
 
-    // Always record where we are so the next navigation can read it.
-    sessionStorage.setItem("prev_path", currentPath);
+    // Always consume the flag immediately so it can't carry over to the next load.
+    const wasClientNav = sessionStorage.getItem("client_nav") === "true";
+    sessionStorage.removeItem("client_nav");
 
     if (currentPath === "/") {
       return;
     }
 
-    // If there is no recorded previous path, this is the first page load in
-    // this tab session — meaning a hard reload or direct URL entry on a
-    // non-home page. Redirect so the intro animation plays from home.
-    if (!prevPath) {
+    // If we landed on a non-home page without a client-nav flag, this is either:
+    //   - a hard reload on /blog (or any sub-page), or
+    //   - a direct URL entry
+    // Both should redirect to home, which then plays the intro animation.
+    if (!wasClientNav) {
       window.location.replace("/");
     }
-
-    // If prevPath exists, we got here via client-side navigation — render normally.
   }, [pathname]);
 
   return (
