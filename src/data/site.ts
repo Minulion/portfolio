@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Andrew Kim",
-  title: "Builder, Software Engineer, Project Manager",
+  title: "Software Engineer, Project Manager, Builder",
   location: "Madison, Wisconsin",
   email: "kminu1101@gmail.com",
   social: {
