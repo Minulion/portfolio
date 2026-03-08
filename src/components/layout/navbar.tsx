@@ -12,22 +12,15 @@ import { cn } from "@/lib/utils";
 
 const navItems = [...homeSectionLinks, ...pageLinks];
 
-// Set immediately before any client-side navigation so site-chrome
-// can distinguish a router push from a hard reload (which never runs JS).
-export const markClientNavigation = () =>
-  sessionStorage.setItem("client_nav", "true");
-
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = () => setIsOpen(false);
-
   const handleSectionNavigation = useCallback(
     (event: MouseEvent<HTMLAnchorElement>, href: string) => {
       closeMenu();
-      markClientNavigation();
 
       if (!href.startsWith("/#")) {
         return;

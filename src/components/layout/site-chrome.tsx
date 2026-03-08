@@ -13,23 +13,17 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-
-    // Always consume the flag immediately so it can't carry over to the next load.
-    const wasClientNav = sessionStorage.getItem("client_nav") === "true";
-    sessionStorage.removeItem("client_nav");
-
     if (currentPath === "/") {
       return;
     }
 
-    // If we landed on a non-home page without a client-nav flag, this is either:
-    //   - a hard reload on /blog (or any sub-page), or
-    //   - a direct URL entry
-    // Both should redirect to home, which then plays the intro animation.
-    if (!wasClientNav) {
+    const navigationEntries = window.performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+    const isReload = navigationEntries[0]?.type === "reload";
+
+    if (isReload) {
       window.location.replace("/");
     }
-  }, [pathname]);
+  }, []);
 
   return (
     <div className="relative min-h-screen overflow-x-clip">
