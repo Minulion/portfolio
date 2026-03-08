@@ -26,11 +26,11 @@ export function HeroSection() {
           className="glass-panel max-w-3xl rounded-3xl p-8 md:p-10"
         >
           <p className="text-xs uppercase tracking-[0.34em] text-fg-muted">Minulion's Portfolio</p>
-          <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-6xl">
-            Hey, I'm Andrew.
+          <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">
+            👋🏻 Hey, I'm Andrew.
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-base text-fg-muted md:text-lg">
-            Welcome to my space! This is where I'll be sharing everything I've been up to—from work to music, food, and more.
+            Welcome to my personal website! This is where I'll be sharing everything I've been up to—from work to music, food, and more.
             <br />
             <br />
             If this is your first time here, scroll down to find out who I am. Otherwise, you can jump straight to my projects, or take a look at what I've been writing about.

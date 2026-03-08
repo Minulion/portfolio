@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Andrew Kim | Portfolio",
-  description: "Modern, animated personal portfolio template built with Next.js and TypeScript.",
+  description: "My portfolio",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

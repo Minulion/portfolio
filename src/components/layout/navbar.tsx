@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useState, type MouseEvent } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { homeSectionLinks, pageLinks, siteConfig } from "@/data/site";
 import { MusicToggle } from "@/components/ui/music-toggle";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -14,59 +14,24 @@ const navItems = [...homeSectionLinks, ...pageLinks];
 
 export function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = () => setIsOpen(false);
-  const handleSectionNavigation = useCallback(
-    (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-      closeMenu();
 
-      if (!href.startsWith("/#")) {
-        return;
-      }
+  const resolveHref = (href: string) => {
+    if (href !== "/#contact") {
+      return href;
+    }
 
-      const targetId = href.replace("/#", "");
-      event.preventDefault();
-
-      const scrollToTarget = () => {
-        const element = document.getElementById(targetId);
-        if (!element) {
-          return false;
-        }
-
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.replaceState(null, "", `/#${targetId}`);
-        return true;
-      };
-
-      if (pathname === "/") {
-        scrollToTarget();
-        return;
-      }
-
-      router.push("/");
-
-      let attempts = 0;
-      const tryScroll = () => {
-        if (scrollToTarget() || attempts > 30) {
-          return;
-        }
-        attempts += 1;
-        window.setTimeout(tryScroll, 35);
-      };
-
-      window.setTimeout(tryScroll, 60);
-    },
-    [pathname, router],
-  );
+    return "#contact";
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-white/20 bg-bg-panel/80 px-4 py-3 shadow-xl shadow-black/10 backdrop-blur-xl md:px-5">
         <Link
           href="/#home"
-          onClick={(event) => handleSectionNavigation(event, "/#home")}
+          onClick={closeMenu}
           className="font-semibold tracking-wide"
         >
           {siteConfig.name}
@@ -93,8 +58,8 @@ export function Navbar() {
             return (
               <Link
                 key={item.label}
-                href={item.href}
-                onClick={(event) => handleSectionNavigation(event, item.href)}
+                href={resolveHref(item.href)}
+                onClick={closeMenu}
                 className={cn(
                   "transition-colors hover:text-accent",
                   isActive ? "text-accent" : "text-fg-muted",
@@ -144,8 +109,8 @@ export function Navbar() {
                     </a>
                   ) : (
                     <Link
-                      href={item.href}
-                      onClick={(event) => handleSectionNavigation(event, item.href)}
+                      href={resolveHref(item.href)}
+                      onClick={closeMenu}
                       className="block rounded-xl px-3 py-2 text-sm text-fg-muted transition hover:bg-white/10 hover:text-foreground"
                     >
                       {item.label}
