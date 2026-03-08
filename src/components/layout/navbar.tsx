@@ -32,8 +32,14 @@ export function Navbar() {
         <Link
           href="/#home"
           onClick={closeMenu}
-          className="font-semibold tracking-wide"
+          className="flex items-center gap-3 font-semibold tracking-wide"
         >
+          <img
+            src="/favicon.ico"
+            alt=""
+            aria-hidden="true"
+            className="h-9 w-9 rounded-lg object-cover"
+          />
           {siteConfig.name}
         </Link>
 
