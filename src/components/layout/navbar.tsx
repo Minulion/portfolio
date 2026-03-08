@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useCallback, useState, type MouseEvent } from "react";
 import { homeSectionLinks, pageLinks, siteConfig } from "@/data/site";
 import { MusicToggle } from "@/components/ui/music-toggle";
@@ -14,7 +14,6 @@ const navItems = [...homeSectionLinks, ...pageLinks];
 
 export function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = () => setIsOpen(false);
@@ -45,20 +44,9 @@ export function Navbar() {
         return;
       }
 
-      router.push("/");
-
-      let attempts = 0;
-      const tryScroll = () => {
-        if (scrollToTarget() || attempts > 30) {
-          return;
-        }
-        attempts += 1;
-        window.setTimeout(tryScroll, 35);
-      };
-
-      window.setTimeout(tryScroll, 60);
+      window.location.assign(href);
     },
-    [pathname, router],
+    [pathname],
   );
 
   return (
