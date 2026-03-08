@@ -13,24 +13,17 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    const prevPath = sessionStorage.getItem("prev_path");
-
-    // Always record where we are so the next navigation can read it.
-    sessionStorage.setItem("prev_path", currentPath);
-
     if (currentPath === "/") {
       return;
     }
 
-    // If there is no recorded previous path, this is the first page load in
-    // this tab session — meaning a hard reload or direct URL entry on a
-    // non-home page. Redirect so the intro animation plays from home.
-    if (!prevPath) {
+    const navigationEntries = window.performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+    const isReload = navigationEntries[0]?.type === "reload";
+
+    if (isReload) {
       window.location.replace("/");
     }
-
-    // If prevPath exists, we got here via client-side navigation — render normally.
-  }, [pathname]);
+  }, []);
 
   return (
     <div className="relative min-h-screen overflow-x-clip">
