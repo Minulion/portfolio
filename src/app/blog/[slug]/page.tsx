@@ -60,6 +60,17 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
+
+        {post.reviewSummary ? (
+          <div className="mt-12 w-fit rounded-3xl border border-accent/30 bg-white/5 px-6 py-6">
+            <p className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+              {post.reviewSummary.score}
+            </p>
+            <p className="mt-3 text-lg font-semibold uppercase tracking-[0.2em] text-accent md:text-xl">
+              {post.reviewSummary.verdict}
+            </p>
+          </div>
+        ) : null}
       </div>
     </article>
   );

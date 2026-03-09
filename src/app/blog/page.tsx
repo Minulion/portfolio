@@ -14,7 +14,7 @@ export default function BlogPage() {
         <p className="text-xs uppercase tracking-[0.28em] text-fg-muted">Writing</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">The Burger Blog 🍔</h1>
         <p className="mt-4 max-w-2xl text-fg-muted">
-          The space where my thoughts take form. Including but not limited to burger reviews.
+          The space where my thoughts take form, including but not limited to burger reviews.
         </p>
 
         <div className="mt-12 space-y-5">
