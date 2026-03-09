@@ -110,17 +110,24 @@ export function ChatbotWidget() {
 
             <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
               {messages.map((message) => (
-                <article
+                <div
                   key={message.id}
                   className={cn(
-                    "max-w-[92%] rounded-2xl px-4 py-2 text-sm leading-relaxed",
-                    message.role === "assistant"
-                      ? "bg-white/10 text-foreground"
-                      : "ml-auto bg-accent text-black",
+                    "flex",
+                    message.role === "assistant" ? "justify-start" : "justify-end",
                   )}
                 >
-                  {message.content}
-                </article>
+                  <article
+                    className={cn(
+                      "w-fit max-w-[92%] rounded-2xl px-4 py-2 text-sm leading-relaxed",
+                      message.role === "assistant"
+                        ? "bg-white/10 text-foreground"
+                        : "bg-accent text-black",
+                    )}
+                  >
+                    {message.content}
+                  </article>
+                </div>
               ))}
               {isLoading ? <p className="text-xs text-fg-muted">Thinking...</p> : null}
             </div>
