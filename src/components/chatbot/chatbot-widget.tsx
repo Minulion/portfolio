@@ -21,7 +21,7 @@ export function ChatbotWidget() {
     {
       id: "intro",
       role: "assistant",
-      content: "Hey, I'm Andrew! Feel free to ask me anything, be it my experiences or hobbies.",
+      content: "Hey, I'm Andrew! Ask me anything, can be work or hobby related loll",
     },
   ]);
 
