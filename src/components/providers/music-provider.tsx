@@ -28,6 +28,19 @@ const TRACKS = {
 } as const;
 const MUTE_STORAGE_KEY = "portfolio-music-muted";
 
+function preloadTrack(href: string) {
+  const existing = document.head.querySelector(`link[rel="preload"][href="${href}"]`);
+  if (existing) {
+    return;
+  }
+
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "audio";
+  link.href = href;
+  document.head.appendChild(link);
+}
+
 export function MusicProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const { resolvedTheme } = useTheme();
@@ -40,6 +53,11 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    preloadTrack(TRACKS.light);
+    preloadTrack(TRACKS.dark);
+  }, []);
+
+  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) {
       return;
@@ -48,6 +66,21 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     audio.muted = isMuted;
     window.localStorage.setItem(MUTE_STORAGE_KEY, String(isMuted));
   }, [isMuted]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    const currentTheme = resolvedTheme === "light" ? "light" : "dark";
+    const nextTrack = TRACKS[currentTheme];
+
+    if (!audio.src.endsWith(nextTrack)) {
+      audio.src = nextTrack;
+      audio.load();
+    }
+  }, [resolvedTheme]);
 
   const playCurrentThemeTrack = useCallback(async () => {
     const audio = audioRef.current;
