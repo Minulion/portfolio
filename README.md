@@ -14,4 +14,6 @@ A modern and interactive portfolio website built with **Next.js**, **React**, **
 
 - Add Minubot functionality
 - Integrate email API
+- Add images to experience, projects, blog posts
 - More blog posts, features (tier list, search, sort)
+
