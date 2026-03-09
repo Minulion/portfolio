@@ -1,8 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Send, Sparkles, X } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { MoveRight, Send, Sparkles, X } from "lucide-react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { useMusic } from "@/components/providers/music-provider";
 import { cn } from "@/lib/utils";
 
 type ChatMessage = {
@@ -14,16 +15,51 @@ type ChatMessage = {
 const CHATBOT_ICON_SRC = "/minubot.png";
 
 export function ChatbotWidget() {
+  const { hasStarted } = useMusic();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "intro",
       role: "assistant",
-      content: "Hey, I'm Andrew! Ask me anything, can be work or hobby related loll",
+      content: "hey, I'm Andrew! ask me anything, can be work or hobby related",
     },
   ]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isLoading, isOpen, messages]);
+
+  useEffect(() => {
+    if (!hasStarted || isOpen) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setShowPrompt(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [hasStarted, isOpen]);
+
+  useEffect(() => {
+    if (!showPrompt) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setShowPrompt(false);
+    }, 5300);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [showPrompt]);
 
   const submitMessage = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -137,6 +173,7 @@ export function ChatbotWidget() {
                 </div>
               ))}
               {isLoading ? <p className="text-xs text-fg-muted">Thinking...</p> : null}
+              <div ref={messagesEndRef} />
             </div>
 
             <form onSubmit={submitMessage} className="border-t border-white/10 p-3">
@@ -161,11 +198,41 @@ export function ChatbotWidget() {
         ) : null}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {showPrompt && !isOpen ? (
+          <motion.div
+            initial={{ opacity: 0, x: 16, y: 0 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            exit={{ opacity: 0, x: 12, y: 0 }}
+            transition={{ duration: 0.50 }}
+            className="mr-20 translate-y-9.5 flex items-center gap-2"
+          >
+            <motion.div
+              animate={{ x: [0, 6, 0] }}
+              transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              className="items-center text-sm font-medium uppercase tracking-[0.2em] text-black"
+            >
+              <span>Talk to me!</span>
+            </motion.div>
+            <motion.div
+              animate={{ x: [0, 8, 0] }}
+              transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              className="text-accent"
+            >
+              <MoveRight className="h-6 w-6" />
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
       <motion.button
         whileTap={{ scale: 0.95 }}
         whileHover={{ scale: 1.04 }}
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          setShowPrompt(false);
+          setIsOpen((prev) => !prev);
+        }}
         className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-accent text-black shadow-2xl"
         aria-label="Toggle assistant"
       >

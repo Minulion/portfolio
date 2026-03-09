@@ -111,5 +111,9 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({ message });
+  function sanitizeAssistantText(text: string) {
+    return text.replaceAll("—", ", ").replaceAll("–", ", ");
+  }
+
+  return NextResponse.json({ message: sanitizeAssistantText(message) });
 }
