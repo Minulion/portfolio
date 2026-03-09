@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { AppProviders } from "@/components/providers/app-providers";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteChrome>{children}</SiteChrome>
         </AppProviders>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
