@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, Send, Sparkles, X } from "lucide-react";
+import { Send, Sparkles, X } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,8 @@ type ChatMessage = {
   role: "user" | "assistant";
   content: string;
 };
+
+const CHATBOT_ICON_SRC = "/minubot.png";
 
 export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +85,7 @@ export function ChatbotWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       <AnimatePresence>
         {isOpen ? (
           <motion.section
@@ -95,8 +97,13 @@ export function ChatbotWidget() {
           >
             <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
               <div className="flex items-center gap-2 text-sm font-medium">
-                <Sparkles className="h-4 w-4 text-accent" />
-                Minubot (my clone) 🤖
+                <img
+                  src={CHATBOT_ICON_SRC}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-5 w-5 rounded-full object-cover"
+                />
+                Minubot (my clone) 
               </div>
               <button
                 type="button"
@@ -121,7 +128,7 @@ export function ChatbotWidget() {
                     className={cn(
                       "w-fit max-w-[92%] rounded-2xl px-4 py-2 text-sm leading-relaxed",
                       message.role === "assistant"
-                        ? "bg-white/10 text-foreground"
+                        ? "bg-[color-mix(in_srgb,var(--fg-primary)_10%,transparent)] text-foreground"
                         : "bg-accent text-black",
                     )}
                   >
@@ -162,7 +169,12 @@ export function ChatbotWidget() {
         className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-accent text-black shadow-2xl"
         aria-label="Toggle assistant"
       >
-        <Bot className="h-6 w-6" />
+        <img
+          src={CHATBOT_ICON_SRC}
+          alt=""
+          aria-hidden="true"
+          className="h-7 w-7 rounded-full object-cover"
+        />
       </motion.button>
     </div>
   );

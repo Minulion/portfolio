@@ -89,9 +89,9 @@ export function AboutSection() {
             Outside of my career, I play drums in a campus band called Unikists. I'm also a huge fan of soccer (Hala Madrid!),
             and I enjoy playing just as much as watching. My favorite food is burgers, as you'll quickly learn if you read my blog...
           </p>
-          <div className="rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-fg-muted">
+          <div className="w-fit rounded-2xl border border-white/20 bg-white/5 p-4 text-sm text-fg-muted">
             <p>
-              <span className="font-medium text-foreground">Currently based in:</span> {siteConfig.location}
+              <span className="font-medium text-foreground">Currently based in:</span> {siteConfig.location} 📍
             </p>
           </div>
         </motion.div>
