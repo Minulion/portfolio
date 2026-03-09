@@ -13,7 +13,8 @@ export async function POST(request: Request) {
   if (!process.env.OPENAI_API_KEY) {
     return NextResponse.json({
       message:
-        "Assistant endpoint is scaffolded. Add OPENAI_API_KEY and your system prompt/context in src/app/api/chat/route.ts.",
+      "Feature coming soon!",
+       // "Assistant endpoint is scaffolded. Add OPENAI_API_KEY and your system prompt/context in src/app/api/chat/route.ts.",
     });
   }
 
