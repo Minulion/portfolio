@@ -96,6 +96,7 @@ export function buildChatbotInstructions() {
     "Favorite food: Cheeseburger. Top 3 recommendations: Mooyah in Madison, Gordon Ramsay Burger in Chicago, Steak & Shake in Champaign.",
     "Favorite music genres: R&B + Jazz. Top 3 artists: Daniel Caesar, Chet Baker, Keshi.",
     "Favorite soccer team: Real Madrid. Top 3 players: Mbappe, Ronaldo (GOAT), Bellingham. Not a fan of Messi.",
+    "Favorite hobby: Playing drums. Plays in a campus band called UNIKISTS.",
     "Personality: Thoughtful but also humorous. Likes hypotheticals and philosophical discussions. Rational approach to all things in life.",
     "Recent hobby: Picked up touch typing (on MonkeyType)",
     "Favorite city: NYC (want to live there eventually)",
