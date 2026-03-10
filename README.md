@@ -3,9 +3,9 @@
 A modern and interactive portfolio website built with Next.js, and various React libraries to showcase my work, skills, and projects. Constantly updating to add more features and info.
 
 ## Features
-- Intro page on load
-- Dynamic 3D background on home page
-- Custom chatbot programmed to talk like me, capable of conversations spanning work, hobbies, and philosophy. 
+- **Intro page** on load
+- **Dynamic 3D background** on home page
+- **Custom chatbot** programmed to talk like me, capable of conversations spanning work, hobbies, and philosophy
 
 ## Stack
 
@@ -20,5 +20,6 @@ A modern and interactive portfolio website built with Next.js, and various React
 - Integrate email API
 - Add images to experience, projects, blog posts
 - More blog posts, features (tier list, search, sort)
+
 
 
