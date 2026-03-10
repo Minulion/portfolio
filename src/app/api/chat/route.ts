@@ -112,7 +112,7 @@ export async function POST(request: Request) {
   }
 
   function sanitizeAssistantText(text: string) {
-    return text.replaceAll("—", ", ").replaceAll("–", ", ");
+    return text.replace(/\s*[—–]\s*/g, ", ");
   }
 
   return NextResponse.json({ message: sanitizeAssistantText(message) });
