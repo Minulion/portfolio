@@ -210,7 +210,8 @@ export function ChatbotWidget() {
             <motion.div
               animate={{ x: [0, 6, 0] }}
               transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              className="items-center text-sm font-medium uppercase tracking-[0.2em] text-black"
+              className="items-center text-sm font-medium uppercase tracking-[0.2em] text-[color-mix(in_srgb,var(--fg-accent)_10%,transparent)]"
+
             >
               <span>Talk to me!</span>
             </motion.div>
