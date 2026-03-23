@@ -20,6 +20,7 @@ A modern and interactive portfolio website built with Next.js, and various React
 - **Framer Motion**
 - **Three.js**
 - **OpenAI API**
+- **Resend API**
 
 ## To-Do
 - Add images to experience, projects, blog posts
