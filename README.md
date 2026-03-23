@@ -21,8 +21,22 @@ A modern and interactive portfolio website built with Next.js, and various React
 - **Three.js**
 - **OpenAI API**
 
+## Contact Form Email Setup
+
+The contact form now posts to `src/app/api/contact/route.ts` and expects these environment variables in `.env.local`:
+
+```bash
+RESEND_API_KEY=re_...
+CONTACT_FROM_EMAIL="Portfolio <onboarding@resend.dev>"
+CONTACT_TO_EMAIL="kminu1101@gmail.com"
+```
+
+Notes:
+- `CONTACT_FROM_EMAIL` must use a sender address allowed by your Resend account. `onboarding@resend.dev` works for local testing.
+- `CONTACT_TO_EMAIL` is where portfolio submissions will be delivered.
+- The route sets `replyTo` to the visitor's email so you can respond directly from your inbox.
+
 ## To-Do
-- Integrate email API
 - Add images to experience, projects, blog posts
 - More blog posts, features (tier list, search, sort)
 

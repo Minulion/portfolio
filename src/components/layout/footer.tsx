@@ -15,7 +15,8 @@ export function Footer() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
     setStatus("submitting");
 
@@ -37,7 +38,7 @@ export function Footer() {
       }
 
       setStatus("success");
-      event.currentTarget.reset();
+      form.reset();
     } catch (error) {
       console.error(error);
       setStatus("error");
@@ -51,7 +52,7 @@ export function Footer() {
           <p className="text-xs uppercase tracking-[0.28em] text-fg-muted">Contact</p>
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Get in touch with me!</h2>
           <p className="max-w-xl text-fg-muted">
-            I'm currently open to new opportunities and I'm always willing to chat. Shoot me an email and let's see what we can do together.
+            I&apos;m currently open to new opportunities and I&apos;m always willing to chat. Shoot me an email and let&apos;s see what we can do together.
           </p>
 
           <div className="flex flex-wrap gap-3 text-sm">
@@ -125,7 +126,7 @@ export function Footer() {
               name="message"
               rows={4}
               className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 outline-none transition focus:border-accent"
-              placeholder="Whatever you'd like to say"
+              placeholder="Whatever you&apos;d like to say"
             />
           </label>
 
@@ -138,7 +139,7 @@ export function Footer() {
           </button>
 
           {status === "success" ? (
-            <p className="text-sm text-emerald-400">Message sent. Replace /api/contact with your real email workflow.</p>
+            <p className="text-sm text-emerald-400">Message sent. I&apos;ll get back to you soon.</p>
           ) : null}
           {status === "error" ? (
             <p className="text-sm text-rose-400">Unable to send right now. Try again later.</p>
