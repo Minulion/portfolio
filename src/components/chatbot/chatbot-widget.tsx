@@ -56,7 +56,7 @@ export function ChatbotWidget() {
 
     const timeoutId = window.setTimeout(() => {
       setShowPrompt(false);
-    }, 5300);
+    }, 10000);
 
     return () => window.clearTimeout(timeoutId);
   }, [showPrompt]);
@@ -137,7 +137,7 @@ export function ChatbotWidget() {
                   src={CHATBOT_ICON_SRC}
                   alt=""
                   aria-hidden="true"
-                  className="h-5 w-5 rounded-full object-cover"
+                  className="h-6 w-6 rounded-full object-cover"
                 />
                 Minubot (my clone) 
               </div>
@@ -205,22 +205,22 @@ export function ChatbotWidget() {
             animate={{ opacity: 1, x: 0, y: 0 }}
             exit={{ opacity: 0, x: 12, y: 0 }}
             transition={{ duration: 0.50 }}
-            className="mr-20 translate-y-9.5 flex items-center gap-2"
+            className="mr-24 translate-y-12 flex items-center gap-3"
           >
             <motion.div
               animate={{ x: [0, 6, 0] }}
-              transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              className="items-center text-sm font-medium uppercase tracking-[0.2em] text-[color-mix(in_srgb,var(--fg-accent)_10%,transparent)]"
+              transition={{ duration: 1.25, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              className="items-center text-base font-medium uppercase tracking-[0.2em] text-[color-mix(in_srgb,var(--fg-accent)_10%,transparent)]"
 
             >
               <span>Talk to me!</span>
             </motion.div>
             <motion.div
-              animate={{ x: [0, 8, 0] }}
-              transition={{ duration: 1.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              animate={{ x: [0, 10, 0] }}
+              transition={{ duration: 1.25, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
               className="text-accent"
             >
-              <MoveRight className="h-6 w-6" />
+              <MoveRight className="h-9 w-9" />
             </motion.div>
           </motion.div>
         ) : null}
@@ -234,14 +234,14 @@ export function ChatbotWidget() {
           setShowPrompt(false);
           setIsOpen((prev) => !prev);
         }}
-        className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-accent text-black shadow-2xl"
+        className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-accent text-black shadow-2xl"
         aria-label="Toggle assistant"
       >
         <img
           src={CHATBOT_ICON_SRC}
           alt=""
           aria-hidden="true"
-          className="h-7 w-7 rounded-full object-cover"
+          className="h-10 w-10 rounded-full object-cover"
         />
       </motion.button>
     </div>
